@@ -1,0 +1,25 @@
+---
+title: "Site map"
+author: "Sophia Qian Niu"
+date: "May 2, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Figure. Map of my collection sites.
+
+```{r}
+library(leaflet)
+sites<-read.csv("locality.csv")
+colnames(sites)<-c("site", "lng", "lat")
+df<-data.frame(lat = sites$lat, lng = sites$lng)
+my_map<- df %>% 
+    leaflet() %>%
+    addTiles() %>%
+    addCircleMarkers(radius = 10, color = "blue", 
+                     popup = sites$site)
+my_map
+```
